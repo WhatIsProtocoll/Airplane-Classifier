@@ -6,6 +6,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
 from ultralytics import YOLO
+from huggingface_hub import hf_hub_download
 
 # -----------------------------
 # Streamlit setup
@@ -27,8 +28,16 @@ def preprocess_image(img_cv2_bgr, target_size=(299, 299)):
 # -----------------------------
 @st.cache_resource
 def load_models():
+    # Load YOLOv8
     yolo = YOLO('yolov8n.pt')
-    clf = load_model('/content/drive/MyDrive/Dat255/model_06_04.keras')
+
+    # Download model from Hugging Face Hub
+    model_path = hf_hub_download(
+        repo_id="williamhutchinson/airport-classifier",  # ⚠️ deinen Hugging Face Namen + Repo anpassen
+        filename="model_06_04.keras",
+        repo_type="model"
+    )
+    clf = load_model(model_path)
     return yolo, clf
 
 yolo_model, clf_model = load_models()
