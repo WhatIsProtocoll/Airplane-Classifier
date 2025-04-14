@@ -33,7 +33,7 @@ def load_models():
 
     # Download model from Hugging Face Hub
     model_path = hf_hub_download(
-        repo_id="williamhutchinson/airport-classifier",  # ⚠️ deinen Hugging Face Namen + Repo anpassen
+        repo_id="WilliWonka99/Airplane_classifier",  # ⚠️ deinen Hugging Face Namen + Repo anpassen
         filename="model_06_04.keras",
         repo_type="model"
     )
