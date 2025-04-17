@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
 from ultralytics import YOLO
 from huggingface_hub import hf_hub_download
-import streamlit.components.v1 as components
 
 # -----------------------------
 # Streamlit setup
@@ -52,17 +51,6 @@ class_labels = [
     "Boeing 757", "Boeing 767", "Boeing 777", "CRJ-700", "Dash 8",
     "Embraer E-Jet", "Airbus A350", "Boeing 787"
 ]
-
-# -----------------------------
-# Embedded livestream (test)
-# -----------------------------
-st.subheader("📡 Live Hamburg Airport Webcam (Vorfeld Süd)")
-components.iframe(
-    src="https://worldcams.tv/germany/hamburg/airport#",
-    height=480,
-    width=800,
-    scrolling=True
-)
 
 # -----------------------------
 # Image upload
