@@ -36,7 +36,8 @@ def load_models():
     model_path = hf_hub_download(
         repo_id="WilliWonka99/Airplane_classifier",  # ⚠️ deinen Hugging Face Namen + Repo anpassen
         filename="model_06_04.keras",
-        repo_type="model"
+        repo_type="model",
+        force_download=True
     )
     clf = load_model(model_path)
     return yolo, clf
