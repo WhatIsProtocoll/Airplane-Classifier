@@ -17,7 +17,7 @@ st.title("✈️ Airport Airplane Detector & Classifier")
 # -----------------------------
 # Preprocessing function
 # -----------------------------
-def preprocess_image(img_cv2_bgr, target_size=(299, 299)):
+def preprocess_image(img_cv2_bgr, target_size=(224, 224)):
     img = cv2.resize(img_cv2_bgr, target_size)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = img.astype('float32') / 255.0
