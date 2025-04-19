@@ -106,7 +106,7 @@ if uploaded_file:
     # Display results
     # -----------------------------
     if crops:
-        st.subheader("✂️ Cropped Airplanes and Predicted Families")
+        st.subheader("✂️ Cropped Airplaness and Predicted Families")
         cols = st.columns(len(crops))
         for idx, col in enumerate(cols):
             col.image(crops[idx], caption=f"{predictions[idx][0]} ({predictions[idx][1]:.2f})", use_container_width=True)
