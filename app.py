@@ -110,11 +110,7 @@ if uploaded_file:
         cols = st.columns(len(crops))
         for idx, col in enumerate(cols):
             class_idx, class_name, confidence = predictions[idx]
-col.image(
-    crops[idx],
-    caption=f"Class {class_idx}: {class_name} ({confidence:.2f})",
-    use_container_width=True
-)
+            col.image(crops[idx], caption=f"Class {class_idx}: {class_name} ({confidence:.2f})", use_container_width=True)
 
 
     else:
