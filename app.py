@@ -47,10 +47,9 @@ yolo_model, clf_model = load_models()
 # Class labels (update as needed)
 # -----------------------------
 class_labels = [
-    "A320", "A330", "A340", "A350", "A380", "ATR-72",
-    "Boeing_737", "Boeing_737_MAX", "Boeing_747", "Boeing_757",
-    "Boeing_767", "Boeing_777", "Boeing_787", "CRJ-700",
-    "Dash_8", "Embraer_E-Jet"
+    'A330', 'Boeing_747', 'CRJ-700', 'ATR-72', 'Boeing_777', 'Boeing_757', 
+    'Boeing_767', 'A340', 'Boeing_737', 'Embraer_E-Jet', 'A320', 
+    'A380', 'Dash_8', 'A350', 'Boeing_787', 'Boeing_737_MAX'
 ]
 
 # -----------------------------
@@ -100,19 +99,15 @@ if uploaded_file:
             pred_conf = float(np.max(pred))
 
             crops.append(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB))  # For display
-            predictions.append((pred_idx, pred_label, pred_conf))
-
+            predictions.append((pred_label, pred_conf))
 
     # -----------------------------
     # Display results
     # -----------------------------
     if crops:
-        st.subheader("✂️ Cropped Airplanes and Predicted Families")
+        st.subheader("✂️ Cropped Airplaness and Predicted Families")
         cols = st.columns(len(crops))
         for idx, col in enumerate(cols):
-            class_idx, class_name, confidence = predictions[idx]
-            col.image(crops[idx], caption=f"Class {class_idx}: {class_name} ({confidence:.2f})", use_container_width=True)
-
-
+            col.image(crops[idx], caption=f"{predictions[idx][0]} ({predictions[idx][1]:.2f})", use_container_width=True)
     else:
         st.warning("No airplanes detected.")
