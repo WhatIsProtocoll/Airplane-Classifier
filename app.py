@@ -47,9 +47,10 @@ yolo_model, clf_model = load_models()
 # Class labels (update as needed)
 # -----------------------------
 class_labels = [
-    "A320", "A330", "A380", "A340", "ATR-72", "Boeing 737", "Boeing 747",
-    "Boeing 757", "Boeing 767", "Boeing 777", "CRJ-700", "Dash 8",
-    "Embraer E-Jet", "Airbus A350", "Boeing 787"
+    'A320', 'A330', 'A340', 'A350', 'A380', 'ATR-72', 
+    'Boeing_737', 'Boeing_737_MAX', 'Boeing_747', 
+    'Boeing_757', 'Boeing_767', 'Boeing_777', 'Boeing_787', 
+    'CRJ-700', 'Dash_8', 'Embraer_E-Jet'
 ]
 
 # -----------------------------
