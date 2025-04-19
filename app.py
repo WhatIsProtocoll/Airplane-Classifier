@@ -33,8 +33,8 @@ def load_models():
 
     # Download model from Hugging Face Hub
     model_path = hf_hub_download(
-        repo_id="WilliWonka99/Airplane_classifier3",  # ⚠️ deinen Hugging Face Namen + Repo anpassen
-        filename="model_17_04_tuned_densenet_71acc.keras",
+        repo_id="SanderConn/dense82acc",  # ⚠️ deinen Hugging Face Namen + Repo anpassen
+        filename="model_19_04_densenet_82_acc.keras",
         repo_type="model",
         force_download=True
     )
