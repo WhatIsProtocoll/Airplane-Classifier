@@ -99,7 +99,8 @@ if uploaded_file:
             pred_conf = float(np.max(pred))
 
             crops.append(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB))  # For display
-            predictions.append((pred_label, pred_conf))
+            predictions.append((pred_idx, pred_label, pred_conf))
+
 
     # -----------------------------
     # Display results
@@ -108,11 +109,7 @@ if uploaded_file:
         st.subheader("✂️ Cropped Airplaness and Predicted Families")
         cols = st.columns(len(crops))
         for idx, col in enumerate(cols):
-            col.image(
-                crops[idx],
-                caption=f"Class {class_labels.index(predictions[idx][0])}: {predictions[idx][0]} ({predictions[idx][1]:.2f})",
-                use_container_width=True
-            )
+            col.image(crops[idx], caption=f"{predictions[idx][0]} ({predictions[idx][1]:.2f})", use_container_width=True)
 
     else:
         st.warning("No airplanes detected.")
