@@ -1,9 +1,9 @@
 import streamlit as st
 import cv2
-import os
+#import os
 import numpy as np
 from PIL import Image
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
 from ultralytics import YOLO
 from huggingface_hub import hf_hub_download
@@ -33,7 +33,7 @@ def load_models():
 
     # Download model from Hugging Face Hub
     model_path = hf_hub_download(
-        repo_id="SanderConn/dense82acc",  # ⚠️ deinen Hugging Face Namen + Repo anpassen
+        repo_id="SanderConn/dense82acc",  
         filename="model_19_04_densenet_82_acc.keras",
         repo_type="model",
         force_download=True
@@ -47,10 +47,10 @@ yolo_model, clf_model = load_models()
 # Class labels (update as needed)
 # -----------------------------
 class_labels = [
-    'A320', 'A330', 'A340', 'A350', 'A380', 'ATR-72', 
-    'Boeing_737', 'Boeing_737_MAX', 'Boeing_747', 
-    'Boeing_757', 'Boeing_767', 'Boeing_777', 'Boeing_787', 
-    'CRJ-700', 'Dash_8', 'Embraer_E-Jet'
+    "A320", "A330", "A340", "A350", "A380", "ATR-72",
+    "Boeing_737", "Boeing_737_MAX", "Boeing_747", "Boeing_757",
+    "Boeing_767", "Boeing_777", "Boeing_787", "CRJ-700",
+    "Dash_8", "Embraer_E-Jet"
 ]
 
 # -----------------------------
@@ -109,6 +109,6 @@ if uploaded_file:
         st.subheader("✂️ Cropped Airplanes and Predicted Families")
         cols = st.columns(len(crops))
         for idx, col in enumerate(cols):
-            col.image(crops[idx], caption=f"{predictions[idx][0]} ({predictions[idx][1]:.2f})", use_column_width=True)
+            col.image(crops[idx], caption=f"{predictions[idx][0]} ({predictions[idx][1]:.2f})", use_container_width=True)
     else:
         st.warning("No airplanes detected.")

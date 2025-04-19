@@ -5,3 +5,7 @@ tensorflow
 matplotlib
 Pillow
 huggingface_hub
+numpy
+pandas
+scikit-learn
+tensorflow
