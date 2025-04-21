@@ -32,8 +32,8 @@ def load_models():
 
     # Download model from Hugging Face Hub
     model_path = hf_hub_download(
-        repo_id="SanderConn/Airplane_classifier6",  
-        filename="model_21_04_densenet_more_layers2_79_acc.keras",
+        repo_id="SanderConn/Airplane_classifier7",  
+        filename="model_21_04_yolo_crop_79_acc.keras",
         repo_type="model",
         force_download=True
     )
