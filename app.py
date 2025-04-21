@@ -5,6 +5,7 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 from ultralytics import YOLO
 from huggingface_hub import hf_hub_download
+import tensorflow as tf
 
 # -----------------------------
 # Streamlit setup
@@ -92,13 +93,16 @@ if uploaded_file:
 
             # Preprocess and predict
             img_input = preprocess_image(cropped)
-            pred = clf_model.predict(img_input)
-            pred_idx = np.argmax(pred)
-            pred_label = class_labels[pred_idx]
-            pred_conf = float(np.max(pred))
-
-            crops.append(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB))  # For display
-            predictions.append((pred_label, pred_conf))
+            # Predict top 3 classes
+            pred = clf_model.predict(img_input)[0]  # shape: (16,)
+            top_k = tf.nn.top_k(pred, k=3)
+            top_k_indices = top_k.indices.numpy()
+            top_k_values = top_k.values.numpy()
+            
+            # Format prediction string
+            top_k_preds = [f"{class_labels[idx]} ({conf:.2f})" for idx, conf in zip(top_k_indices, top_k_values)]
+            predictions.append(top_k_preds)
+            crops.append(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB))
 
     # -----------------------------
     # Display results
@@ -107,6 +111,9 @@ if uploaded_file:
         st.subheader("✂️ Cropped Airplanes and Predicted Families")
         cols = st.columns(len(crops))
         for idx, col in enumerate(cols):
-            col.image(crops[idx], caption=f"{predictions[idx][0]} ({predictions[idx][1]:.2f})", use_container_width=True)
+            col.image(crops[idx], use_container_width=True)
+            col.markdown("**Top 3 predictions:**")
+            for line in predictions[idx]:
+                col.markdown(f"- {line}")
     else:
         st.warning("No airplanes detected.")
