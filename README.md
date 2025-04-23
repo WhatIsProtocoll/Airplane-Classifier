@@ -74,7 +74,7 @@ The app allows users to upload an airport image. It uses YOLOv8 to detect airpla
 - The predicted airplane family name and confidence score are shown directly in the app.
 
 
-## 👨Authors
+## Authors
 
 - **William Bour Hutchinson**
 - **Sander Conn Ødegaard**  
