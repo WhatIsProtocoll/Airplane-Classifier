@@ -59,7 +59,7 @@ class_labels = [
 st.markdown("### Upload Your Own Image or Choose a Demo")
 
 # Option 1: Demo image
-demo_folder = "demo_images"
+demo_folder = "data/demo_images"
 demo_images = [f for f in os.listdir(demo_folder) if f.lower().endswith((".jpg", ".jpeg", ".png"))]
 selected_demo = st.selectbox("Choose a demo image:", [""] + demo_images)
 
