@@ -61,7 +61,9 @@ st.markdown("### Upload Your Own Image or Choose a Demo")
 # Option 1: Demo image
 demo_folder = "data/demo_images"
 demo_images = [f for f in os.listdir(demo_folder) if f.lower().endswith((".jpg", ".jpeg", ".png"))]
-selected_demo = st.selectbox("Choose a demo image:", [""] + demo_images)
+demo_images.sort()
+selectbox_options = ["Select this for image upload"] + demo_images
+selected_demo = st.selectbox("Choose a demo image:", selectbox_options, index=0)
 
 # Option 2: Upload image
 uploaded_user_file = st.file_uploader("Or upload an airport image", type=["jpg", "jpeg", "png"])
