@@ -6,6 +6,7 @@ from tensorflow.keras.models import load_model
 from ultralytics import YOLO
 from huggingface_hub import hf_hub_download
 import tensorflow as tf
+import os
 
 # -----------------------------
 # Streamlit setup
@@ -53,13 +54,25 @@ class_labels = [
 ]
 
 # -----------------------------
+# Demo image selection
+# -----------------------------
+st.subheader("📸 Try a Demo Image")
+demo_folder = "data/demo_images"
+demo_images = [f for f in os.listdir(demo_folder) if f.lower().endswith((".jpg", ".jpeg", ".png"))]
+selected_demo = st.selectbox("Choose a demo image:", [""] + demo_images)
+
+if selected_demo:
+    uploaded_file = open(os.path.join(demo_folder, selected_demo), "rb")
+
+# -----------------------------
 # Image upload
 # -----------------------------
-uploaded_file = st.file_uploader("Upload an airport image", type=["jpg", "jpeg", "png"])
+st.markdown("### Or Upload Your Own Image")
+uploaded_file = uploaded_file or st.file_uploader("Upload an airport image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
     image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+    st.image(image, caption="Uploaded Image", use_container_width=True)
 
     image_np = np.array(image)
     image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
@@ -93,13 +106,11 @@ if uploaded_file:
 
             # Preprocess and predict
             img_input = preprocess_image(cropped)
-            # Predict top 3 classes
-            pred = clf_model.predict(img_input)[0]  # shape: (16,)
+            pred = clf_model.predict(img_input)[0]
             top_k = tf.nn.top_k(pred, k=3)
             top_k_indices = top_k.indices.numpy()
             top_k_values = top_k.values.numpy()
-            
-            # Format prediction string
+
             top_k_preds = [f"{class_labels[idx]} ({conf:.2f})" for idx, conf in zip(top_k_indices, top_k_values)]
             predictions.append(top_k_preds)
             crops.append(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB))
@@ -111,7 +122,7 @@ if uploaded_file:
         st.subheader("✂️ Cropped Airplanes and Predicted Families")
         cols = st.columns(len(crops))
         for idx, col in enumerate(cols):
-            col.image(crops[idx], use_column_width=True)
+            col.image(crops[idx], use_container_width=True)
             col.markdown("**Top 3 predictions:**")
             for line in predictions[idx]:
                 col.markdown(f"- {line}")
