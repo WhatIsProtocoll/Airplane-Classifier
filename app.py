@@ -68,9 +68,9 @@ selected_demo = st.selectbox("Choose a demo image:", selectbox_options, index=0)
 # Option 2: Upload image
 uploaded_user_file = st.file_uploader("Or upload an airport image", type=["jpg", "jpeg", "png"])
 
-# Logic: Prioritize demo image if selected
+# Logic: Prioritize demo image if selected (and not just the placeholder)
 uploaded_file = None
-if selected_demo:
+if selected_demo != "Select this for image upload":
     uploaded_file = open(os.path.join(demo_folder, selected_demo), "rb")
 elif uploaded_user_file:
     uploaded_file = uploaded_user_file
