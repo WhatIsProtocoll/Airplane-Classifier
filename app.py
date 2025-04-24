@@ -54,22 +54,25 @@ class_labels = [
 ]
 
 # -----------------------------
-# Demo image selection
+# Image selection (demo or upload)
 # -----------------------------
-st.subheader("📸 Try a Demo Image")
-demo_folder = "data/demo_images"
+st.markdown("### Upload Your Own Image or Choose a Demo")
+
+# Option 1: Demo image
+demo_folder = "demo_images"
 demo_images = [f for f in os.listdir(demo_folder) if f.lower().endswith((".jpg", ".jpeg", ".png"))]
 selected_demo = st.selectbox("Choose a demo image:", [""] + demo_images)
 
+# Option 2: Upload image
+uploaded_user_file = st.file_uploader("Or upload an airport image", type=["jpg", "jpeg", "png"])
+
+# Logic: Prioritize demo image if selected
+uploaded_file = None
 if selected_demo:
     uploaded_file = open(os.path.join(demo_folder, selected_demo), "rb")
-
-# -----------------------------
-# Image upload
-# -----------------------------
-st.markdown("### Or Upload Your Own Image")
-uploaded_file = uploaded_file or st.file_uploader("Upload an airport image", type=["jpg", "jpeg", "png"])
-
+elif uploaded_user_file:
+    uploaded_file = uploaded_user_file
+    
 if uploaded_file:
     image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="Uploaded Image", use_container_width=True)
