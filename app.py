@@ -77,7 +77,7 @@ elif uploaded_user_file:
     
 if uploaded_file:
     image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_container_width=True)
+    st.image(image, caption="Uploaded Image", use_column_width=True)
 
     image_np = np.array(image)
     image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
@@ -127,7 +127,7 @@ if uploaded_file:
         st.subheader("✂️ Cropped Airplanes and Predicted Families")
         cols = st.columns(len(crops))
         for idx, col in enumerate(cols):
-            col.image(crops[idx], use_container_width=True)
+            col.image(crops[idx], use_column_width=True)
             col.markdown("**Top 3 predictions:**")
             for line in predictions[idx]:
                 col.markdown(f"- {line}")
