@@ -7,11 +7,14 @@ This project uses deep learning to detect and classify airplanes in real-world i
 ## Project Structure
 
 ```
-├── data/                # Folder with training and test images
-├── app.py               # Streamlit app for running inference with YOLO + classifier
-├── model.ipynb          # Notebook used for training the model
-├── requirements.txt     # Python dependencies
-├── packages.txt         # System dependencies (for OpenCV image handling and Streamlit compatibility)
+├── data/                  # Folder containing training/test/demo images and annotations
+│   └── demo_images/       # Sample images used as selectable demo inputs in the app
+├── app.py                 # Streamlit app for inference using YOLOv8 and DenseNet classifier
+├── pre_processing.ipynb   # Full preprocessing pipeline (filtering, cleaning, YOLO cropping)
+├── trainModel.ipynb       # Script to train the classifier on the processed dataset
+├── requirements.txt       # Python dependencies for running the app locally
+├── packages.txt           # System-level dependencies for Streamlit deployment (e.g. OpenCV)
+├── README.md              # Project overview and structure
 
 ```
 
